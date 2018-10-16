@@ -1,10 +1,12 @@
 "use strict";
-// let randomColumn = Math.ceil(Math.random() * 3);
-// let randomRow = Math.ceil(Math.random() * 3);
-// console.log(randomColumn, randomRow);
+let randomColumn = Math.ceil(Math.random() * 3);
+let randomRow = Math.ceil(Math.random() * 3);
+console.log(randomColumn, randomRow);
 
-// const inputIndex = Math.ceil(Math.random() * 9);
-// const input = document.querySelector(`input:nth-of-type(${inputIndex})`);
-// input.style.gridColumnStart = randomColumn;
-// input.style.gridRowStart = randomRow;
-// console.log(input);
+const cellIndex = Math.ceil(Math.random() * 9);
+console.log(cellIndex);
+const cell = document.querySelector(`option:nth-of-type(${cellIndex})`);
+cell.style.gridColumnStart = randomColumn;
+cell.style.gridRowStart = randomRow;
+cell.setAttribute("selected", "");
+console.log(cell);
