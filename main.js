@@ -6,7 +6,7 @@ console.log(randomColumn, randomRow);
 const cellIndex = Math.ceil(Math.random() * 9);
 console.log(cellIndex);
 const cell = document.querySelector(`option:nth-of-type(${cellIndex})`);
-cell.style.gridColumnStart = randomColumn;
-cell.style.gridRowStart = randomRow;
 cell.setAttribute("selected", "");
+cell.parentElement.style.gridColumnStart = randomColumn; // option is inside select, select is grid element
+cell.parentElement.style.gridRowStart = randomRow;
 console.log(cell);
