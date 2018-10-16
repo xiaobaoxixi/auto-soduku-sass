@@ -1,0 +1,40 @@
+:root {
+  font-size: 62.5%;
+  /* martins default em, haha */ }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative; }
+
+body {
+  color: #123456;
+  padding: 10vw; }
+
+h1 {
+  color: #123456;
+  font-size: 2em; }
+
+section {
+  display: grid;
+  grid-template-columns: repeat(3, 3vw);
+  grid-template-rows: repeat(3, 3vw);
+  border: none; }
+
+select {
+  display: grid;
+  grid-template-columns: repeat(3, 1vw);
+  grid-template-rows: repeat(3, 1vw);
+  border: none; }
+
+form {
+  display: grid;
+  grid-template-columns: repeat(3, calc( (3vw + 5px) * 3));
+  grid-template-rows: repeat(3, calc( (3vw + 5px) * 3)); }
+
+input {
+  height: 3vw;
+  width: 3vw;
+  border: 1px solid grey;
+  font-size: 2vw; }

@@ -1,0 +1,24 @@
+{
+  "name": "sass",
+  "version": "1.0.0",
+  "description": "sass exercises",
+  "main": "index.js",
+  "dependencies": {
+    "node-sass": "^4.9.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mysass": "node-sass sass/style.scss css/style.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaobaoxixi/sass.git"
+  },
+  "author": "Yan Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaobaoxixi/sass/issues"
+  },
+  "homepage": "https://github.com/xiaobaoxixi/sass#readme"
+}

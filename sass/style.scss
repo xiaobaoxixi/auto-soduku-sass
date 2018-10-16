@@ -1,0 +1,33 @@
+@import "init";
+
+body {
+  color: $main-color;
+  padding: 10vw;
+}
+h1 {
+  color: $main-color;
+  font-size: 2em;
+}
+section {
+  display: grid;
+  grid-template-columns: repeat(3, 3vw);
+  grid-template-rows: repeat(3, 3vw);
+  border: none;
+}
+select {
+  display: grid;
+  grid-template-columns: repeat(3, 1vw);
+  grid-template-rows: repeat(3, 1vw);
+  border: none;
+}
+form {
+  display: grid;
+  grid-template-columns: repeat(3, $one-piece-with-border);
+  grid-template-rows: repeat(3, $one-piece-with-border);
+}
+input {
+  height: $one-piece-size;
+  width: $one-piece-size;
+  border: 1px solid grey;
+  font-size: 2vw; // cell size is 3vw. but this still doesn't garantie that numbers will always be shown, maybe because of the arrow area on the right side of the input box
+}
