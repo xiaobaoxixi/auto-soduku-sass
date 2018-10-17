@@ -10,9 +10,13 @@
 
 <body>
     <h1>soduku</h1>
-    <p><span class="dup-col">Red</span> marks the 'first' appearance of a duplicated digit in each column.</p>
     <br>
-    <p>Not checking all duplicated digit. Found one, jump to next column.</p>
+    <p>Validate in 3 steps:</p>
+    <p><span class="dup-col">Red</span> marks the 'first' appearance of a duplicated digit in each column.</p>
+    <p><span class="dup-row">Green</span> marks the 'first' appearance of a duplicated digit in each row.</p>
+    <p><span class="dup-cell">Blue</span> marks the 'first' appearance of a duplicated digit in each column.</p>
+    <br>
+    <p><i>* Not checking all duplicated digit at the same time. Found one, jump to next.</i></p>
     <form action="" name="soduku" autocomplete="off">
         <section>
 
