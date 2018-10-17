@@ -55,7 +55,19 @@ function check() {
         console.log("has dup at " + colNr);
         colS[rI - 1].classList.add("dup-col");
         break;
+      } else {
+        colS[rI - 1].classList.remove("dup-col");
       }
     }
+  }
+  const allDigitS = document.querySelectorAll("select");
+  allDigitS.forEach(d => {
+    d.addEventListener("change", changeValue);
+  });
+  function changeValue(o) {
+    o.target.querySelector("[selected]").removeAttribute("selected");
+    console.log(o.target[o.target.selectedIndex]); // use this to get  the newly selected value, even though it doesn't have the 'selected' attribute
+    o.target[o.target.selectedIndex].setAttribute("selected", "");
+    check();
   }
 }
