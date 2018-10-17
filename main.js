@@ -29,25 +29,33 @@ function buildResult(s, i) {
 }
 check();
 function check() {
-  for (let rowNr = 1; rowNr < 10; rowNr++) {
+  for (let colNr = 1; colNr < 10; colNr++) {
     let fieldRow;
-    if (rowNr >= 1 && rowNr <= 3) {
+    if (colNr >= 1 && colNr <= 3) {
       fieldRow = 1;
-    } else if (rowNr >= 4 && rowNr <= 6) {
+    } else if (colNr >= 4 && colNr <= 6) {
       fieldRow = 2;
-    } else if (rowNr >= 7 && rowNr <= 9) {
+    } else if (colNr >= 7 && colNr <= 9) {
       fieldRow = 3;
     }
-    const row = document.querySelectorAll(
+    const rowS = document.querySelectorAll(
       `section:nth-of-type(3n+${fieldRow}) [style^='grid-column-start: ${
-        rowNr % 3 === 0 ? 3 : rowNr % 3
+        colNr % 3 === 0 ? 3 : colNr % 3
       }']`
     );
-    console.log(row);
     let valueS = [];
-    row.forEach(r => {
-      valueS.push(r.querySelector("[selected]").getAttribute("value"));
-    });
-    console.log(valueS);
+    let filterDup = [];
+    for (let rI = 1; rI < 10; rI++) {
+      valueS.push(
+        rowS[rI - 1].querySelector("[selected]").getAttribute("value")
+      ); // not in the exact same order as in one column, but no effect on checking dulplication.
+      // console.log(valueS); // check this log to see exact order
+      filterDup = valueS.filter((e, i) => valueS.indexOf(e) === i);
+      console.log(filterDup);
+      if (valueS.length !== filterDup.length) {
+        console.log("has dup at " + colNr);
+        break;
+      }
+    }
   }
 }
