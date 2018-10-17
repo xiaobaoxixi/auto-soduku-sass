@@ -27,19 +27,19 @@ function buildResult(s, i) {
     position.splice(position.indexOf(cellIndex), 1); // update position array, so each position (1-9) only gets picked once
   }
 }
-check();
-function check() {
+//checkCol(); // check col by default
+function checkCol() {
   for (let colNr = 1; colNr < 10; colNr++) {
-    let fieldRow;
+    let fieldCol;
     if (colNr >= 1 && colNr <= 3) {
-      fieldRow = 1;
+      fieldCol = 1;
     } else if (colNr >= 4 && colNr <= 6) {
-      fieldRow = 2;
+      fieldCol = 2;
     } else if (colNr >= 7 && colNr <= 9) {
-      fieldRow = 3;
+      fieldCol = 3;
     }
     const colS = document.querySelectorAll(
-      `section:nth-of-type(3n+${fieldRow}) [style^='grid-column-start: ${
+      `section:nth-of-type(3n+${fieldCol}) [style^='grid-column-start: ${
         colNr % 3 === 0 ? 3 : colNr % 3
       }']`
     );
@@ -60,14 +60,49 @@ function check() {
       }
     }
   }
-  const allDigitS = document.querySelectorAll("select");
-  allDigitS.forEach(d => {
-    d.addEventListener("change", changeValue);
-  });
-  function changeValue(o) {
-    o.target.querySelector("[selected]").removeAttribute("selected");
-    console.log(o.target[o.target.selectedIndex]); // use this to get  the newly selected value, even though it doesn't have the 'selected' attribute
-    o.target[o.target.selectedIndex].setAttribute("selected", "");
-    check();
+}
+checkRow();
+function checkRow() {
+  for (let rowNr = 1; rowNr < 10; rowNr++) {
+    let valueS = [];
+    let filterDup = [];
+    let fieldIndexArray = [];
+    if (rowNr >= 1 && rowNr < 4) fieldIndexArray = [1, 2, 3];
+    if (rowNr >= 4 && rowNr < 7) fieldIndexArray = [4, 5, 6];
+    if (rowNr >= 7 && rowNr < 10) fieldIndexArray = [7, 8, 9];
+    fieldIndexArray.forEach(getRow);
+    function getRow(i) {
+      const field = document.querySelector(`section:nth-of-type(${i})`);
+      const digitSInRow = field.querySelectorAll(
+        `[style*='grid-row-start: ${rowNr % 3 === 0 ? 3 : rowNr % 3}']`
+      );
+      digitSInRow.forEach(getValue);
+      function getValue(d) {
+        let value = d.querySelector("[selected").getAttribute("value");
+        valueS.push(value);
+      }
+    }
+    console.log(valueS);
   }
+  // filterDup = valueS.filter((e, i) => valueS.indexOf(e) === i);
+  // if (valueS.length !== filterDup.length) {
+  //   console.log("has dup");
+  //   //      colS[rI - 1].classList.add("dup-row");
+  //   //      break;
+  // } else {
+  //   //    colS[rI - 1].classList.remove("dup-row");
+  // }
+}
+
+// listen to user select, and rerun check col
+const allDigitS = document.querySelectorAll("select");
+allDigitS.forEach(d => {
+  d.addEventListener("change", changeValue);
+});
+function changeValue(o) {
+  o.target.querySelector("[selected]").removeAttribute("selected");
+  console.log(o.target[o.target.selectedIndex]); // use this to get  the newly selected value, even though it doesn't have the 'selected' attribute
+  o.target[o.target.selectedIndex].setAttribute("selected", "");
+  checkCol();
+  //checkCell();
 }
