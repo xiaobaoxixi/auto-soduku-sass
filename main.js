@@ -38,7 +38,7 @@ function check() {
     } else if (colNr >= 7 && colNr <= 9) {
       fieldRow = 3;
     }
-    const rowS = document.querySelectorAll(
+    const colS = document.querySelectorAll(
       `section:nth-of-type(3n+${fieldRow}) [style^='grid-column-start: ${
         colNr % 3 === 0 ? 3 : colNr % 3
       }']`
@@ -47,13 +47,13 @@ function check() {
     let filterDup = [];
     for (let rI = 1; rI < 10; rI++) {
       valueS.push(
-        rowS[rI - 1].querySelector("[selected]").getAttribute("value")
+        colS[rI - 1].querySelector("[selected]").getAttribute("value")
       ); // not in the exact same order as in one column, but no effect on checking dulplication.
       // console.log(valueS); // check this log to see exact order
       filterDup = valueS.filter((e, i) => valueS.indexOf(e) === i);
-      console.log(filterDup);
       if (valueS.length !== filterDup.length) {
         console.log("has dup at " + colNr);
+        colS[rI - 1].classList.add("dup-col");
         break;
       }
     }

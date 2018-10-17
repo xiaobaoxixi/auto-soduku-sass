@@ -1,5 +1,5 @@
 :root {
-  font-size: 62.5%;
+  font-size: 100%;
   /* martins default em, haha */ }
 
 * {
@@ -18,23 +18,22 @@ h1 {
 
 section {
   display: grid;
-  grid-template-columns: repeat(3, 3vw);
-  grid-template-rows: repeat(3, 3vw);
+  grid-template-columns: repeat(3, 4vw);
+  grid-template-rows: repeat(3, 4vw);
   border: none; }
 
 select {
   display: grid;
-  grid-template-columns: repeat(3, 1vw);
-  grid-template-rows: repeat(3, 1vw);
-  border: none; }
+  grid-template-columns: repeat(3, 1.33333vw);
+  grid-template-rows: repeat(3, 1.33333vw);
+  border: none;
+  font-size: 1.7em; }
 
 form {
   display: grid;
-  grid-template-columns: repeat(3, calc( (3vw + 5px) * 3));
-  grid-template-rows: repeat(3, calc( (3vw + 5px) * 3)); }
+  grid-template-columns: repeat(3, calc( (4vw + 5px) * 3));
+  grid-template-rows: repeat(3, calc( (4vw + 5px) * 3));
+  grid-gap: 20px; }
 
-input {
-  height: 3vw;
-  width: 3vw;
-  border: 1px solid grey;
-  font-size: 2vw; }
+.dup-col {
+  color: red; }

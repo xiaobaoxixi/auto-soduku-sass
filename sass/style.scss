@@ -10,24 +10,23 @@ h1 {
 }
 section {
   display: grid;
-  grid-template-columns: repeat(3, 3vw);
-  grid-template-rows: repeat(3, 3vw);
+  grid-template-columns: repeat(3, $one-piece-size);
+  grid-template-rows: repeat(3, $one-piece-size);
   border: none;
 }
 select {
   display: grid;
-  grid-template-columns: repeat(3, 1vw);
-  grid-template-rows: repeat(3, 1vw);
+  grid-template-columns: repeat(3, $one-piece-size/3);
+  grid-template-rows: repeat(3, $one-piece-size/3);
   border: none;
+  font-size: 1.7em;
 }
 form {
   display: grid;
   grid-template-columns: repeat(3, $one-piece-with-border);
   grid-template-rows: repeat(3, $one-piece-with-border);
+  grid-gap: 20px;
 }
-input {
-  height: $one-piece-size;
-  width: $one-piece-size;
-  border: 1px solid grey;
-  font-size: 2vw; // cell size is 3vw. but this still doesn't garantie that numbers will always be shown, maybe because of the arrow area on the right side of the input box
+.dup-col {
+  color: red;
 }

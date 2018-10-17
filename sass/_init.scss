@@ -1,5 +1,5 @@
 :root {
-  font-size: 10px/16px * 100%; /* martins default em, haha */
+  font-size: 16px/16px * 100%; /* martins default em, haha */
 }
 * {
   margin: 0;
@@ -9,7 +9,7 @@
 }
 $main-color: #123456;
 $font: Helvetica, sans-serif;
-$one-piece-size: 3vw;
+$one-piece-size: 4vw;
 $one-piece-with-border: calc(
-  (3vw + 5px) * 3
+  (4vw + 5px) * 3
 ); // 2px is the border of each input box
