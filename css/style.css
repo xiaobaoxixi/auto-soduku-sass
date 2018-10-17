@@ -37,3 +37,9 @@ form {
 
 .dup-col {
   color: red; }
+
+.dup-row {
+  color: green; }
+
+.dup-cell {
+  color: blue; }
