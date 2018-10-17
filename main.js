@@ -27,7 +27,7 @@ function buildResult(s, i) {
     position.splice(position.indexOf(cellIndex), 1); // update position array, so each position (1-9) only gets picked once
   }
 }
-//checkCol(); // check col by default
+checkCol(); // check col by default
 function checkCol() {
   for (let colNr = 1; colNr < 10; colNr++) {
     let fieldCol;
@@ -52,7 +52,6 @@ function checkCol() {
       // console.log(valueS); // check this log to see exact order
       filterDup = valueS.filter((e, i) => valueS.indexOf(e) === i);
       if (valueS.length !== filterDup.length) {
-        console.log("has dup at " + colNr);
         colS[rI - 1].classList.add("dup-col");
         break;
       } else {
@@ -61,37 +60,36 @@ function checkCol() {
     }
   }
 }
-checkRow();
-function checkRow() {
-  for (let rowNr = 1; rowNr < 10; rowNr++) {
-    let valueS = [];
-    let filterDup = [];
-    let fieldIndexArray = [];
-    if (rowNr >= 1 && rowNr < 4) fieldIndexArray = [1, 2, 3];
-    if (rowNr >= 4 && rowNr < 7) fieldIndexArray = [4, 5, 6];
-    if (rowNr >= 7 && rowNr < 10) fieldIndexArray = [7, 8, 9];
-    fieldIndexArray.forEach(getRow);
-    function getRow(i) {
-      const field = document.querySelector(`section:nth-of-type(${i})`);
-      const digitSInRow = field.querySelectorAll(
-        `[style*='grid-row-start: ${rowNr % 3 === 0 ? 3 : rowNr % 3}']`
-      );
-      digitSInRow.forEach(getValue);
-      function getValue(d) {
-        let value = d.querySelector("[selected").getAttribute("value");
-        valueS.push(value);
-      }
+//checkRow();
+function checkRow(rowNr) {
+  //  for (let rowNr = 1; rowNr < 10; rowNr++) {
+  let valueS = [];
+  let filterDup = [];
+  let fieldIndexArray = [];
+  if (rowNr >= 1 && rowNr < 4) fieldIndexArray = [1, 2, 3];
+  if (rowNr >= 4 && rowNr < 7) fieldIndexArray = [4, 5, 6];
+  if (rowNr >= 7 && rowNr < 10) fieldIndexArray = [7, 8, 9];
+  fieldIndexArray.forEach(getRow);
+  function getRow(i) {
+    const field = document.querySelector(`section:nth-of-type(${i})`);
+    const digitSInRow = field.querySelectorAll(
+      `[style*='grid-row-start: ${rowNr % 3 === 0 ? 3 : rowNr % 3}']`
+    );
+    digitSInRow.forEach(getValue);
+    function getValue(d) {
+      let value = d.querySelector("[selected").getAttribute("value");
+      valueS.push(value);
     }
-    console.log(valueS);
   }
-  // filterDup = valueS.filter((e, i) => valueS.indexOf(e) === i);
-  // if (valueS.length !== filterDup.length) {
-  //   console.log("has dup");
-  //   //      colS[rI - 1].classList.add("dup-row");
-  //   //      break;
-  // } else {
-  //   //    colS[rI - 1].classList.remove("dup-row");
-  // }
+  console.log(valueS);
+  filterDup = valueS.filter((e, ei) => valueS.indexOf(e) === ei);
+  if (valueS.length !== filterDup.length) {
+    console.log("has dup at row " + rowNr);
+    //      colS[rI - 1].classList.add("dup-row");
+    //break;
+  } else {
+    //    colS[rI - 1].classList.remove("dup-row");
+  }
 }
 
 // listen to user select, and rerun check col
@@ -100,9 +98,19 @@ allDigitS.forEach(d => {
   d.addEventListener("change", changeValue);
 });
 function changeValue(o) {
-  o.target.querySelector("[selected]").removeAttribute("selected");
-  console.log(o.target[o.target.selectedIndex]); // use this to get  the newly selected value, even though it doesn't have the 'selected' attribute
-  o.target[o.target.selectedIndex].setAttribute("selected", "");
-  checkCol();
-  //checkCell();
+  for (let sectionI = 0; sectionI < 10; sectionI++) {
+    if (sectionS[sectionI] === o.target.parentElement) {
+      let cellRow = Math.ceil((sectionI + 1) / 3);
+      let digitRow = o.target.getAttribute("style")[
+        o.target.getAttribute("style").indexOf("grid-row-start:") + 16
+      ];
+      let rowNr = (Number(cellRow) - 1) * 3 + Number(digitRow);
+      console.log(rowNr);
+      o.target.querySelector("[selected]").removeAttribute("selected");
+      console.log(o.target[o.target.selectedIndex]); // use this to get  the newly selected value, even though it doesn't have the 'selected' attribute
+      o.target[o.target.selectedIndex].setAttribute("selected", "");
+      checkCol();
+      checkRow(rowNr);
+    }
+  }
 }
